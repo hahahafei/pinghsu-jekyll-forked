@@ -2,7 +2,40 @@
 layout: default
 ---
 
-<div class="main-content index-page clearfix">
+<div class="main-content archive-page clearfix">
+    <div class="categorys-item">
+        <div class="post-lists">
+            <div class="post-lists-body">
+                {% for post in site.posts %}
+                {% capture this_category %}{{ post.category }}{% endcapture %}
+                {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+                {% capture this_month %}{{ post.date | date: "%B" }}{% endcapture %}
+                {% capture next_year %}{{ post.next.date | date: "%Y" }}{% endcapture %}
+                {% capture next_month %}{{ post.next.date | date: "%B" }}{% endcapture %}
+
+                {% if this_month != next_month or this_year != next_year %}
+                <div class="categorys-title">{{ this_category }}</div>
+                {% endif %}
+
+                <div class="post-list-item">
+                    <div class="post-list-item-container">
+                        <div class="item-label">
+                            <div class="item-title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></div>
+                            <div class="item-meta clearfix">
+                                <!-- <div class="item-meta-date"> {{ post.date | date: "%b %d, %Y" }} </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- <div class="main-content index-page clearfix">
     <div class="post-lists">
         <div class="post-lists-body">
             {% for post in paginator.posts %}
@@ -54,4 +87,4 @@ layout: default
     </div>
     {% endif %}
 
-</div>
+</div> -->
